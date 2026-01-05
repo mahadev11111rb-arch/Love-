@@ -1,102 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Everything ❤️</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap');
-
-        body {
-            margin: 0; padding: 0; display: flex; justify-content: center;
-            align-items: center; min-height: 100vh;
-            background: #ffe5ec;
-            font-family: 'Poppins', sans-serif; overflow: hidden; text-align: center;
-            transition: background 2s ease;
-        }
-
-        .heart { position: absolute; color: #ff4d6d; animation: float 5s linear infinite; opacity: 0.7; z-index: 0; }
-        @keyframes float {
-            0% { transform: translateY(110vh) scale(0); opacity: 1; }
-            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 40px; border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
-            width: 85%; max-width: 450px; z-index: 10;
-            border: 2px solid #ffb3c1;
-        }
-
-        h1 { font-family: 'Dancing Script', cursive; color: #ff4d6d; font-size: 3rem; margin-bottom: 10px; }
-        p { color: #590d22; font-size: 1.1rem; margin-bottom: 25px; }
-
-        .btn {
-            background: #ff4d6d; color: white; border: none;
-            padding: 18px 35px; border-radius: 50px; font-weight: bold;
-            cursor: pointer; font-size: 1rem;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
-        }
-        .btn:hover { transform: scale(1.1); background: #c9184a; }
-
-        /* Music bar animation */
-        .music-waves { display: none; justify-content: center; align-items: flex-end; height: 30px; gap: 5px; margin-top: 20px; }
-        .bar { width: 5px; background: #ff4d6d; animation: wave 1s ease-in-out infinite; }
-        @keyframes wave { 0%, 100% { height: 5px; } 50% { height: 30px; } }
-    </style>
+<meta charset="UTF-8">
+<title>Kareza ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:#000;
+    color:#fff;
+    text-align:center;
+    overflow:hidden;
+}
+.screen{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    padding:20px;
+}
+.hidden{display:none;}
+.fade{animation:fadeIn 2s forwards;}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.typing{
+    font-size:22px;
+    line-height:1.6;
+    border-right:2px solid #fff;
+    white-space:nowrap;
+    overflow:hidden;
+}
+.countdown{
+    font-size:80px;
+    font-weight:bold;
+    animation:zoom 1s infinite;
+}
+@keyframes zoom{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.2);}
+    100%{transform:scale(1);}
+}
+.heart{
+    font-size:90px;
+    animation:beat 1.2s infinite;
+}
+@keyframes beat{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.3);}
+    100%{transform:scale(1);}
+}
+button{
+    margin-top:30px;
+    padding:16px 40px;
+    font-size:18px;
+    border:none;
+    border-radius:40px;
+    background:#ff2d55;
+    color:#fff;
+    cursor:pointer;
+    box-shadow:0 10px 30px rgba(255,45,85,0.6);
+}
+button:hover{background:#ff4f70;}
+.floating{
+    position:fixed;
+    bottom:-40px;
+    font-size:24px;
+    animation:floatUp 6s infinite;
+}
+@keyframes floatUp{
+    from{transform:translateY(0);opacity:1;}
+    to{transform:translateY(-900px);opacity:0;}
+}
+</style>
 </head>
+
 <body>
 
-    <audio id="loveSong" loop>
-        <source src="love.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+<audio autoplay loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
 
-    <div class="card">
-        <h1 id="heading">For You... ❤️</h1>
-        <p id="message">Aapki smile mere liye sabse zaroori hai. <br> Ek chhota sa surprise click karein!</p>
-        
-        <button class="btn" id="playBtn" onclick="startExperience()">Press for Magic ✨</button>
+<!-- Screen 1 -->
+<div class="screen" id="s1">
+    <div class="typing" id="type"></div>
+</div>
 
-        <div class="music-waves" id="waves">
-            <div class="bar" style="animation-delay: 0.1s"></div>
-            <div class="bar" style="animation-delay: 0.3s"></div>
-            <div class="bar" style="animation-delay: 0.5s"></div>
-            <div class="bar" style="animation-delay: 0.2s"></div>
-            <div class="bar" style="animation-delay: 0.4s"></div>
-        </div>
-    </div>
+<!-- Screen 2 -->
+<div class="screen hidden" id="s2">
+    <div class="countdown" id="count">3</div>
+</div>
 
-    <script>
-        function startExperience() {
-            var audio = document.getElementById("loveSong");
-            audio.play().catch(function(error) {
-                console.log("Audio play failed: ", error);
-            });
-            
-            // Visual Changes
-            document.body.style.background = "#ffb3c1";
-            document.getElementById("playBtn").style.display = "none";
-            document.getElementById("waves").style.display = "flex";
-            document.getElementById("heading").innerHTML = "I Love You! 💖";
-            document.getElementById("message").innerHTML = "Ye music hamari har pyaari baat ko yaad dilata hai. <br> You are my forever!";
-            
-            // Hearts Rainfall
-            setInterval(createHeart, 300);
+<!-- Screen 3 -->
+<div class="screen hidden fade" id="s3">
+    <div class="heart">❤️</div>
+    <h1 style="margin-top:20px;">Kareza</h1>
+    <p style="margin-top:25px;font-size:20px;line-height:1.7;">
+        Tum sirf meri kahani ka hissa nahi ho,<br>
+        tum meri poori kahani ho ✨<br><br>
+        Har khamoshi me tum ho,<br>
+        har dua me sirf tum ❤️
+    </p>
+    <h2 style="margin-top:30px;">Will You Be Mine Forever? 💍</h2>
+    <button onclick="finalYes()">YES ❤️</button>
+</div>
+
+<script>
+const text = "Kuch log zindagi me aate nahi...\nwo zindagi ban jaate hain.";
+let i=0;
+function typeText(){
+    if(i<text.length){
+        document.getElementById("type").innerHTML +=
+            text.charAt(i)==="\n" ? "<br>" : text.charAt(i);
+        i++;
+        setTimeout(typeText,80);
+    }else{
+        setTimeout(()=>{
+            document.getElementById("s1").classList.add("hidden");
+            document.getElementById("s2").classList.remove("hidden");
+            startCount();
+        },1200);
+    }
+}
+typeText();
+
+let c=3;
+function startCount(){
+    const el=document.getElementById("count");
+    const timer=setInterval(()=>{
+        c--;
+        el.innerText=c;
+        if(c===0){
+            clearInterval(timer);
+            document.getElementById("s2").classList.add("hidden");
+            document.getElementById("s3").classList.remove("hidden");
         }
+    },1000);
+}
 
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.fontSize = Math.random() * 20 + 15 + 'px';
-            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
-            document.body.appendChild(heart);
-            setTimeout(() => { heart.remove(); }, 5000);
-        }
-    </script>
+function finalYes(){
+    for(let i=0;i<45;i++){
+        let h=document.createElement("div");
+        h.innerHTML="❤️";
+        h.className="floating";
+        h.style.left=Math.random()*100+"%";
+        h.style.animationDuration=(Math.random()*3+3)+"s";
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),6000);
+    }
+}
+</script>
+
 </body>
 </html>
