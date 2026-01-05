@@ -2,152 +2,118 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Kareza ❤️</title>
+<title>Kareza</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
-    font-family:'Segoe UI',sans-serif;
-    background:#000;
-    color:#fff;
-    text-align:center;
-    overflow:hidden;
-}
-.screen{
-    min-height:100vh;
+    font-family: 'Georgia', serif;
+    background:#0b0b0b;
+    color:#eaeaea;
     display:flex;
-    align-items:center;
     justify-content:center;
-    flex-direction:column;
-    padding:20px;
+    align-items:center;
+    min-height:100vh;
+    text-align:center;
 }
-.hidden{display:none;}
-.fade{animation:fadeIn 2s forwards;}
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-.typing{
-    font-size:22px;
-    line-height:1.6;
-    border-right:2px solid #fff;
-    white-space:nowrap;
-    overflow:hidden;
+.container{
+    max-width:500px;
+    padding:30px;
+    animation:fadeIn 2s ease;
 }
-.countdown{
-    font-size:80px;
-    font-weight:bold;
-    animation:zoom 1s infinite;
+h1{
+    font-size:42px;
+    letter-spacing:2px;
+    margin-bottom:25px;
 }
-@keyframes zoom{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.2);}
-    100%{transform:scale(1);}
+p{
+    font-size:18px;
+    line-height:1.8;
+    color:#cfcfcf;
 }
-.heart{
-    font-size:90px;
-    animation:beat 1.2s infinite;
-}
-@keyframes beat{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.3);}
-    100%{transform:scale(1);}
+.line{
+    width:60px;
+    height:2px;
+    background:#c9a24d;
+    margin:25px auto;
 }
 button{
-    margin-top:30px;
-    padding:16px 40px;
-    font-size:18px;
+    margin-top:40px;
+    padding:14px 36px;
+    font-size:16px;
+    letter-spacing:1px;
     border:none;
-    border-radius:40px;
-    background:#ff2d55;
-    color:#fff;
+    background:#c9a24d;
+    color:#0b0b0b;
     cursor:pointer;
-    box-shadow:0 10px 30px rgba(255,45,85,0.6);
+    transition:0.3s;
 }
-button:hover{background:#ff4f70;}
-.floating{
-    position:fixed;
-    bottom:-40px;
-    font-size:24px;
-    animation:floatUp 6s infinite;
+button:hover{
+    background:#e0b85f;
 }
-@keyframes floatUp{
-    from{transform:translateY(0);opacity:1;}
-    to{transform:translateY(-900px);opacity:0;}
+#final{
+    display:none;
+    margin-top:35px;
+    font-size:20px;
+    color:#fff;
+}
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(20px);}
+    to{opacity:1;transform:translateY(0);}
 }
 </style>
 </head>
 
 <body>
 
-<audio autoplay loop>
-    <source src="music.mp3" type="audio/mpeg">
+<audio id="music" autoplay loop>
+    <source src="cinematic.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Screen 1 -->
-<div class="screen" id="s1">
-    <div class="typing" id="type"></div>
-</div>
+<div class="container">
+    <h1>Kareza</h1>
 
-<!-- Screen 2 -->
-<div class="screen hidden" id="s2">
-    <div class="countdown" id="count">3</div>
-</div>
-
-<!-- Screen 3 -->
-<div class="screen hidden fade" id="s3">
-    <div class="heart">❤️</div>
-    <h1 style="margin-top:20px;">Kareza</h1>
-    <p style="margin-top:25px;font-size:20px;line-height:1.7;">
-        Tum sirf meri kahani ka hissa nahi ho,<br>
-        tum meri poori kahani ho ✨<br><br>
-        Har khamoshi me tum ho,<br>
-        har dua me sirf tum ❤️
+    <p>
+        Main impress karne ke liye  
+        shabd ya drama nahi laaya hoon.  
+        <br><br>
+        Bas itna jaanta hoon —  
+        tumhari jagah meri zindagi me  
+        koi aur nahi le sakta.
     </p>
-    <h2 style="margin-top:30px;">Will You Be Mine Forever? 💍</h2>
-    <button onclick="finalYes()">YES ❤️</button>
+
+    <div class="line"></div>
+
+    <p>
+        Agar tum chaho,  
+        to main is kahani ko  
+        poori zimmedari ke saath  
+        aage badhaana chahta hoon.
+    </p>
+
+    <button onclick="show()">Yes</button>
+
+    <div id="final">
+        Then I choose you.  
+        Today. And every day.
+    </div>
 </div>
 
 <script>
-const text = "Kuch log zindagi me aate nahi...\nwo zindagi ban jaate hain.";
-let i=0;
-function typeText(){
-    if(i<text.length){
-        document.getElementById("type").innerHTML +=
-            text.charAt(i)==="\n" ? "<br>" : text.charAt(i);
-        i++;
-        setTimeout(typeText,80);
-    }else{
-        setTimeout(()=>{
-            document.getElementById("s1").classList.add("hidden");
-            document.getElementById("s2").classList.remove("hidden");
-            startCount();
-        },1200);
+const music = document.getElementById("music");
+music.volume = 0;
+let v = 0;
+let fade = setInterval(()=>{
+    if(v < 0.5){
+        v += 0.01;
+        music.volume = v;
+    } else {
+        clearInterval(fade);
     }
-}
-typeText();
+},200);
 
-let c=3;
-function startCount(){
-    const el=document.getElementById("count");
-    const timer=setInterval(()=>{
-        c--;
-        el.innerText=c;
-        if(c===0){
-            clearInterval(timer);
-            document.getElementById("s2").classList.add("hidden");
-            document.getElementById("s3").classList.remove("hidden");
-        }
-    },1000);
-}
-
-function finalYes(){
-    for(let i=0;i<45;i++){
-        let h=document.createElement("div");
-        h.innerHTML="❤️";
-        h.className="floating";
-        h.style.left=Math.random()*100+"%";
-        h.style.animationDuration=(Math.random()*3+3)+"s";
-        document.body.appendChild(h);
-        setTimeout(()=>h.remove(),6000);
-    }
+function show(){
+    document.getElementById("final").style.display="block";
 }
 </script>
 
