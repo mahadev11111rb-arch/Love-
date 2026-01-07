@@ -2,9 +2,10 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ankita 💗</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
 *{
@@ -16,112 +17,132 @@ font-family:'Poppins',sans-serif;
 
 body{
 min-height:100vh;
-background:linear-gradient(135deg,#ffd6e8,#ffffff);
+background:linear-gradient(180deg,#ffd6e8,#ffffff);
 display:flex;
-justify-content:center;
 align-items:center;
+justify-content:center;
 overflow:hidden;
 }
 
 /* CARD */
 .card{
-background:rgba(255,255,255,0.85);
-backdrop-filter:blur(10px);
-padding:35px 30px;
+width:95%;
+max-width:480px;
+background:white;
+padding:30px 25px 40px;
 border-radius:25px;
-width:90%;
-max-width:420px;
 text-align:center;
-box-shadow:0 20px 40px rgba(255,105,180,0.35);
+box-shadow:0 25px 50px rgba(255,105,180,.35);
 }
 
-/* SHAYARI */
-.shayari{
-font-size:16px;
-line-height:1.8;
-color:#b3005e;
-margin-bottom:18px;
-animation:fadeIn 2s ease;
-}
+/* ANIMATIONS */
+.hidden{display:none;}
+.fade{animation:fadeUp 1.2s ease forwards;}
 
-/* QUESTION */
-.question{
-font-size:14px;
-color:#8a0045;
-margin-bottom:25px;
-opacity:0;
-animation:fadeInUp 2s ease forwards;
-animation-delay:2s;
-}
-
-/* NAME */
-.name{
-font-family:'Great Vibes',cursive;
-font-size:52px;
-color:#ff2f92;
-text-shadow:0 0 15px rgba(255,47,146,.6);
-margin-bottom:5px;
-}
-
-.line{
-width:120px;
-height:3px;
-background:#ff2f92;
-margin:8px auto 20px;
-border-radius:5px;
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
 }
 
 /* TEXT */
+.shayari{
+font-size:18px;
+line-height:1.9;
+color:#b3005e;
+}
+
+.question{
+font-size:16px;
+color:#7a003c;
+margin-top:15px;
+}
+
+.name{
+font-family:'Great Vibes',cursive;
+font-size:64px;
+color:#ff2f92;
+margin-top:20px;
+}
+
+.line{
+width:140px;
+height:4px;
+background:#ff2f92;
+margin:10px auto 20px;
+border-radius:10px;
+}
+
 .text{
-font-size:17px;
+font-size:18px;
 color:#444;
-margin-bottom:25px;
 }
 
 /* BUTTONS */
 .buttons{
+margin-top:25px;
 display:flex;
 justify-content:center;
-gap:20px;
+gap:25px;
 }
 
 button{
-padding:12px 32px;
-font-size:16px;
+padding:14px 36px;
+font-size:18px;
 border:none;
-border-radius:30px;
+border-radius:40px;
 cursor:pointer;
-transition:.4s;
 }
 
 #yes{
-background:linear-gradient(45deg,#ff5fa2,#ff2f92);
+background:#ff2f92;
 color:white;
-box-shadow:0 0 15px rgba(255,47,146,.7);
 display:none;
 }
 
 #no{
-background:#f1f1f1;
-color:#555;
+background:#eee;
+color:#444;
 }
 
-/* FINAL LINE */
-.final-line{
-margin-top:25px;
-font-size:19px;
-line-height:1.8;
+/* FINAL TEXT */
+.final{
+font-size:22px;
+line-height:1.9;
 color:#b3005e;
-text-shadow:0 0 12px rgba(255,47,146,.4);
-animation:fadeInUp 2s ease forwards;
+margin-top:25px;
+min-height:90px;
+}
+
+/* MESSAGE BOX */
+.msgbox{
+margin-top:20px;
+}
+
+textarea{
+width:100%;
+height:90px;
+padding:14px;
+border-radius:15px;
+border:1px solid #ccc;
+font-size:16px;
+}
+
+.send{
+margin-top:12px;
+width:100%;
+background:#25D366;
+color:white;
+font-size:18px;
+padding:12px;
+border:none;
+border-radius:30px;
 }
 
 /* HEARTS */
 .heart{
 position:fixed;
-font-size:22px;
-color:#ff2f92;
-animation:floatUp 4s linear infinite;
+font-size:26px;
+animation:floatUp 5s linear infinite;
 }
 
 @keyframes floatUp{
@@ -130,53 +151,43 @@ transform:translateY(-120vh);
 opacity:0;
 }
 }
-
-/* ANIMATIONS */
-@keyframes fadeIn{
-from{opacity:0;}
-to{opacity:1;}
-}
-
-@keyframes fadeInUp{
-from{
-opacity:0;
-transform:translateY(15px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
 </style>
 </head>
 
 <body>
 
-<div class="card" id="card">
+<div class="card">
 
-<div class="shayari">
+<div id="line1" class="shayari fade">
 मुँह ज़बानी न जताता कि मोहब्बत क्या है<br>
 मैं तुझे कर के दिखाता कि मोहब्बत क्या है<br><br>
 कैसे सीने से लगाऊँ कि किसी और के हो<br>
 मेरे होते तो बताता कि मोहब्बत क्या है
 </div>
 
-<div class="question">
+<div id="line2" class="question hidden">
 Main bas ek simple sawal poochna chahta hoon,<br>
 aur uska jawab sirf tumhari marzi se hona chahiye —<br>
 kya tumhare dil me mere liye pyaar hai?
 </div>
 
-<div class="name">Ankita</div>
-<div class="line"></div>
+<div id="line3" class="name hidden">Ankita</div>
+<div id="line4" class="line hidden"></div>
 
-<div class="text">
+<div id="line5" class="text hidden">
 Kya tum meri zindagi ka hissa banogi? 💗
 </div>
 
-<div class="buttons">
+<div class="buttons" id="buttons">
 <button id="yes">Yes ❤️</button>
 <button id="no">No</button>
+</div>
+
+<div id="final" class="final"></div>
+
+<div id="msgbox" class="msgbox hidden">
+<textarea id="msg" placeholder="Jo bhi tum mere liye mehsoos karti ho, bina jhijhak yahan likho… main padhunga ❤️"></textarea>
+<button class="send" onclick="sendWhatsApp()">Send 💌</button>
 </div>
 
 </div>
@@ -185,41 +196,46 @@ Kya tum meri zindagi ka hissa banogi? 💗
 <audio id="song" src="ankita-song.mp3"></audio>
 
 <script>
-let noClicks = 0;
-const noBtn = document.getElementById("no");
-const yesBtn = document.getElementById("yes");
+/* LINE BY LINE SHOW */
+setTimeout(()=>line2.classList.remove("hidden"),1500);
+setTimeout(()=>line3.classList.remove("hidden"),3000);
+setTimeout(()=>line4.classList.remove("hidden"),3500);
+setTimeout(()=>line5.classList.remove("hidden"),4000);
 
-noBtn.onclick = () => {
+let noClicks=0;
+
+no.onclick=()=>{
 noClicks++;
+no.style.transform=`translate(${Math.random()*300-150}px,${Math.random()*200-100}px)`;
 
-noBtn.style.transform =
-`translate(${Math.random()*250-125}px,${Math.random()*200-100}px)`;
-
-if(noClicks === 2){
-document.getElementById("voice").play();
+if(noClicks===2){
+voice.play();
+no.remove();
 
 setTimeout(()=>{
-yesBtn.style.display="inline-block";
+yes.style.display="inline-block";
 },6000);
 }
 };
 
-yesBtn.onclick = () => {
-document.getElementById("song").play();
+/* YES CLICK */
+yes.onclick=()=>{
+song.play();
+buttons.remove();
 
-document.querySelector(".buttons").remove();
-document.querySelector(".text").remove();
+let text="तुम जिंदगी की वो कमी हो, जो शायद जिंदगी भर रहेगी…!!!";
+let i=0;
+let interval=setInterval(()=>{
+final.innerHTML+=text.charAt(i);
+i++;
+if(i>=text.length){
+clearInterval(interval);
+msgbox.classList.remove("hidden");
+}
+},80);
 
-const final = document.createElement("div");
-final.className = "final-line";
-final.innerHTML = `
-तुम जिंदगी की वो कमी हो,<br>
-जो शायद जिंदगी भर रहेगी…!!!
-`;
-document.getElementById("card").appendChild(final);
-
-for(let i=0;i<30;i++){
-let h = document.createElement("div");
+for(let i=0;i<100;i++){
+let h=document.createElement("div");
 h.className="heart";
 h.innerHTML="❤️";
 h.style.left=Math.random()*100+"vw";
@@ -227,6 +243,14 @@ h.style.bottom="-20px";
 document.body.appendChild(h);
 }
 };
+
+/* WHATSAPP SEND */
+function sendWhatsApp(){
+let msg=document.getElementById("msg").value;
+let phone="919955414283";
+let url=`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+window.open(url,"_blank");
+}
 </script>
 
 </body>
