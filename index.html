@@ -1,116 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>For Ankita ❤️</title>
+<title>Ankita ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
-  height:100vh;
-  background:radial-gradient(circle at top,#1e2a47,#05070d);
-  font-family:Poppins,sans-serif;
-  overflow:hidden;
-  color:white;
+ height:100vh;
+ background:linear-gradient(to bottom,#000428,#004e92);
+ font-family:Poppins,sans-serif;
+ overflow:hidden;
+ color:white;
 }
 
-/* ⭐ Premium stars */
+/* glowing stars */
 .star{
-  position:fixed;
-  width:2px;
-  height:2px;
-  background:white;
-  border-radius:50%;
-  animation:twinkle 2.5s infinite alternate;
+ position:fixed;
+ width:3px;
+ height:3px;
+ background:white;
+ box-shadow:0 0 8px white;
+ animation:blink 3s infinite;
 }
-@keyframes twinkle{from{opacity:.2;}to{opacity:1;}}
+@keyframes blink{50%{opacity:.2;}}
 
-/* ❄️ Soft snow */
+/* heavy snow */
 .snow{
-  position:fixed;
-  top:-10px;
-  color:white;
-  opacity:.7;
-  animation:snow linear infinite;
+ position:fixed;
+ top:-20px;
+ color:white;
+ animation:fall linear infinite;
 }
-@keyframes snow{to{transform:translateY(110vh);}}
+@keyframes fall{to{transform:translateY(120vh);}}
 
-/* ❤️ Hearts */
+/* hearts */
 .heart{
-  position:fixed;
-  bottom:-20px;
-  color:red;
-  animation:float 6s linear forwards;
-  text-align:center;
+ position:fixed;
+ bottom:-20px;
+ color:red;
+ animation:rise 5s linear forwards;
+ text-align:center;
 }
-@keyframes float{to{transform:translateY(-120vh);opacity:0;}}
+@keyframes rise{to{transform:translateY(-130vh);opacity:0;}}
 
 .container{
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:30px;
-  z-index:2;
-  position:relative;
+ height:100vh;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ text-align:center;
+ padding:20px;
 }
-
-h1{font-size:54px;text-shadow:0 0 25px white;}
-p{font-size:24px;max-width:900px;line-height:1.8;margin-top:25px;}
+h1{font-size:56px;text-shadow:0 0 30px #fff;}
+p{font-size:26px;max-width:850px;line-height:1.8;margin-top:25px;}
 
 .buttons{
-  margin-top:60px;
-  width:420px;
-  height:220px;
-  position:relative;
+ margin-top:70px;
+ width:420px;
+ height:240px;
+ position:relative;
 }
 button{
-  padding:18px 40px;
-  font-size:20px;
-  border:none;
-  border-radius:50px;
-  cursor:pointer;
-  position:absolute;
-  transition:.3s;
+ padding:20px 45px;
+ font-size:22px;
+ border:none;
+ border-radius:60px;
+ cursor:pointer;
+ position:absolute;
+ transition:.3s;
 }
-#noBtn{background:#eee;color:#333;right:0;bottom:20px;}
+#noBtn{background:#f1f1f1;color:#333;right:0;bottom:20px;}
 #yesBtn{
-  display:none;
-  background:#ff003c;
-  color:white;
-  left:140px;
-  bottom:20px;
-  box-shadow:0 0 35px rgba(255,0,60,.9);
+ display:none;
+ background:#ff1744;
+ color:white;
+ left:130px;
+ bottom:20px;
+ box-shadow:0 0 40px #ff1744;
 }
 .big-heart{
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  font-size:130px;
-  animation:pulse 1.5s infinite;
+ position:fixed;
+ top:50%;
+ left:50%;
+ transform:translate(-50%,-50%);
+ font-size:150px;
+ animation:pulse 1.4s infinite;
 }
-@keyframes pulse{50%{transform:translate(-50%,-50%) scale(1.1);}}
+@keyframes pulse{50%{transform:translate(-50%,-50%) scale(1.15);}}
 </style>
 </head>
 
 <body>
 
 <div class="container">
-  <h1>Ankita ❤️</h1>
-  <p>
-    Is khubsurat raat me, sitaron ke neeche,  
-    mera dil sirf tumhara naam leta hai ✨  
-    <br><br>
-    Kya tum meri zindagi ka hamesha ka hissa banogi?
-  </p>
+ <h1>Ankita ❤️</h1>
+ <p>
+   Agar meri har saans ek kahani hoti,  
+   to uska har panna tumhara naam hota ✨  
+   <br><br>
+   Kya tum meri zindagi ki wo kahani banogi?
+ </p>
 
-  <div class="buttons">
-    <button id="noBtn">No 😐</button>
-    <button id="yesBtn">Yes 💖</button>
-  </div>
+ <div class="buttons">
+  <button id="noBtn">No 😐</button>
+  <button id="yesBtn">Yes 💖</button>
+ </div>
 </div>
 
 <audio id="voice" src="ankita-voice.mp3"></audio>
@@ -118,12 +114,11 @@ button{
 
 <script>
 /* stars */
-for(let i=0;i<160;i++){
+for(let i=0;i<180;i++){
  let s=document.createElement("div");
  s.className="star";
  s.style.left=Math.random()*100+"vw";
  s.style.top=Math.random()*100+"vh";
- s.style.animationDuration=(2+Math.random()*3)+"s";
  document.body.appendChild(s);
 }
 
@@ -133,54 +128,46 @@ setInterval(()=>{
  sn.className="snow";
  sn.innerHTML="❄";
  sn.style.left=Math.random()*100+"vw";
- sn.style.fontSize=(10+Math.random()*18)+"px";
- sn.style.animationDuration=(6+Math.random()*6)+"s";
+ sn.style.fontSize=(12+Math.random()*22)+"px";
+ sn.style.animationDuration=(4+Math.random()*4)+"s";
  document.body.appendChild(sn);
- setTimeout(()=>sn.remove(),12000);
-},250);
+ setTimeout(()=>sn.remove(),10000);
+},150);
 
-let c=0;
+let t=0;
 const noBtn=document.getElementById("noBtn");
 const yesBtn=document.getElementById("yesBtn");
 
 noBtn.addEventListener("mouseenter",()=>{
- c++;
- if(c===1){noBtn.innerHTML="No 😠";move();}
- else if(c===2){noBtn.innerHTML="No 😡";move();}
- else{
+ t++;
+ if(t<3){
+  noBtn.innerHTML=t==1?"No 😠":"No 😡";
+  noBtn.style.left=Math.random()*300+"px";
+  noBtn.style.top=Math.random()*150+"px";
+ }else{
   document.getElementById("voice").play();
   noBtn.style.display="none";
   yesBtn.style.display="block";
  }
 });
 
-function move(){
- noBtn.style.left=Math.random()*260+"px";
- noBtn.style.top=Math.random()*120+"px";
-}
-
 yesBtn.onclick=()=>{
  document.getElementById("music").play();
- setInterval(createHeart,220);
- showBigHeart();
-};
+ setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(30+Math.random()*35)+"px";
+  h.innerHTML="❤️<br>I Love You";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+ },200);
 
-function createHeart(){
- let h=document.createElement("div");
- h.className="heart";
- h.style.left=Math.random()*100+"vw";
- h.style.fontSize=(28+Math.random()*30)+"px";
- h.innerHTML="❤️<br>I Love You";
- document.body.appendChild(h);
- setTimeout(()=>h.remove(),6000);
-}
-
-function showBigHeart(){
  let b=document.createElement("div");
  b.className="big-heart";
- b.innerHTML="❤️<div style='font-size:30px;margin-top:-25px;'>Ankita</div>";
+ b.innerHTML="❤️<div style='font-size:34px;margin-top:-30px;'>Ankita</div>";
  document.body.appendChild(b);
-}
+};
 </script>
 
 </body>
