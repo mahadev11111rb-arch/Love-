@@ -4,135 +4,182 @@
 <meta charset="UTF-8">
 <title>For Ankita ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
-body {
-  margin: 0;
-  height: 100vh;
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: Poppins, sans-serif;
-  overflow: hidden;
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  height:100vh;
+  background:radial-gradient(circle at top,#1e2a47,#05070d);
+  font-family:Poppins,sans-serif;
+  overflow:hidden;
+  color:white;
 }
 
-.card {
-  background: #fff;
-  padding: 30px;
-  border-radius: 25px;
-  text-align: center;
-  width: 320px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+/* ⭐ Premium stars */
+.star{
+  position:fixed;
+  width:2px;
+  height:2px;
+  background:white;
+  border-radius:50%;
+  animation:twinkle 2.5s infinite alternate;
+}
+@keyframes twinkle{from{opacity:.2;}to{opacity:1;}}
+
+/* ❄️ Soft snow */
+.snow{
+  position:fixed;
+  top:-10px;
+  color:white;
+  opacity:.7;
+  animation:snow linear infinite;
+}
+@keyframes snow{to{transform:translateY(110vh);}}
+
+/* ❤️ Hearts */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  color:red;
+  animation:float 6s linear forwards;
+  text-align:center;
+}
+@keyframes float{to{transform:translateY(-120vh);opacity:0;}}
+
+.container{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:30px;
+  z-index:2;
+  position:relative;
 }
 
-h1 { color: #ff4d6d; }
+h1{font-size:54px;text-shadow:0 0 25px white;}
+p{font-size:24px;max-width:900px;line-height:1.8;margin-top:25px;}
 
-.buttons {
-  margin-top: 25px;
-  height: 120px;
-  position: relative;
+.buttons{
+  margin-top:60px;
+  width:420px;
+  height:220px;
+  position:relative;
 }
-
-button {
-  padding: 12px 25px;
-  border: none;
-  border-radius: 30px;
-  font-size: 16px;
-  cursor: pointer;
-  position: absolute;
+button{
+  padding:18px 40px;
+  font-size:20px;
+  border:none;
+  border-radius:50px;
+  cursor:pointer;
+  position:absolute;
+  transition:.3s;
 }
-
-#noBtn {
-  background: #ddd;
-  color: #333;
-  right: 30px;
-  bottom: 10px;
+#noBtn{background:#eee;color:#333;right:0;bottom:20px;}
+#yesBtn{
+  display:none;
+  background:#ff003c;
+  color:white;
+  left:140px;
+  bottom:20px;
+  box-shadow:0 0 35px rgba(255,0,60,.9);
 }
-
-#yesBtn {
-  background: #ff4d6d;
-  color: #fff;
-  left: 90px;
-  bottom: 10px;
-  display: none;
+.big-heart{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:130px;
+  animation:pulse 1.5s infinite;
 }
-
-/* ❤️ Heart animation */
-.heart {
-  position: fixed;
-  bottom: 0;
-  font-size: 24px;
-  color: red;
-  animation: floatUp 4s linear forwards;
-}
-
-@keyframes floatUp {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(-100vh); opacity: 0; }
-}
+@keyframes pulse{50%{transform:translate(-50%,-50%) scale(1.1);}}
 </style>
 </head>
 
 <body>
 
-<div class="card">
+<div class="container">
   <h1>Ankita ❤️</h1>
-  <p>Kya tum meri zindagi ka sabse khoobsurat hissa banogi?</p>
+  <p>
+    Is khubsurat raat me, sitaron ke neeche,  
+    mera dil sirf tumhara naam leta hai ✨  
+    <br><br>
+    Kya tum meri zindagi ka hamesha ka hissa banogi?
+  </p>
 
   <div class="buttons">
-    <button id="noBtn" onclick="noClicked()">No 🙈</button>
-    <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
+    <button id="noBtn">No 😐</button>
+    <button id="yesBtn">Yes 💖</button>
   </div>
 </div>
 
-<!-- 🔊 VOICE (3rd No Click) -->
-<audio id="voice">
-  <source src="ankita-voice.mp3" type="audio/mpeg">
-</audio>
-
-<!-- 🎵 MUSIC (Yes Click) -->
-<audio id="music">
-  <source src="ankita-song.mp3" type="audio/mpeg">
-</audio>
+<audio id="voice" src="ankita-voice.mp3"></audio>
+<audio id="music" src="ankita-song.mp3"></audio>
 
 <script>
-let noCount = 0;
-
-function noClicked() {
-  const noBtn = document.getElementById("noBtn");
-  const yesBtn = document.getElementById("yesBtn");
-  const voice = document.getElementById("voice");
-
-  if (noCount < 2) {
-    noBtn.style.left = Math.random() * 180 + "px";
-    noBtn.style.top = Math.random() * 60 + "px";
-  } 
-  else {
-    voice.play();              // 🔊 voice plays
-    noBtn.style.display = "none";
-    yesBtn.style.display = "block";
-  }
-  noCount++;
+/* stars */
+for(let i=0;i<160;i++){
+ let s=document.createElement("div");
+ s.className="star";
+ s.style.left=Math.random()*100+"vw";
+ s.style.top=Math.random()*100+"vh";
+ s.style.animationDuration=(2+Math.random()*3)+"s";
+ document.body.appendChild(s);
 }
 
-function yesClicked() {
-  const music = document.getElementById("music");
-  music.play();
+/* snow */
+setInterval(()=>{
+ let sn=document.createElement("div");
+ sn.className="snow";
+ sn.innerHTML="❄";
+ sn.style.left=Math.random()*100+"vw";
+ sn.style.fontSize=(10+Math.random()*18)+"px";
+ sn.style.animationDuration=(6+Math.random()*6)+"s";
+ document.body.appendChild(sn);
+ setTimeout(()=>sn.remove(),12000);
+},250);
 
-  setInterval(createHeart, 300);
+let c=0;
+const noBtn=document.getElementById("noBtn");
+const yesBtn=document.getElementById("yesBtn");
+
+noBtn.addEventListener("mouseenter",()=>{
+ c++;
+ if(c===1){noBtn.innerHTML="No 😠";move();}
+ else if(c===2){noBtn.innerHTML="No 😡";move();}
+ else{
+  document.getElementById("voice").play();
+  noBtn.style.display="none";
+  yesBtn.style.display="block";
+ }
+});
+
+function move(){
+ noBtn.style.left=Math.random()*260+"px";
+ noBtn.style.top=Math.random()*120+"px";
 }
 
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "❤️";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = (20 + Math.random() * 20) + "px";
+yesBtn.onclick=()=>{
+ document.getElementById("music").play();
+ setInterval(createHeart,220);
+ showBigHeart();
+};
 
-  document.body.appendChild(heart);
+function createHeart(){
+ let h=document.createElement("div");
+ h.className="heart";
+ h.style.left=Math.random()*100+"vw";
+ h.style.fontSize=(28+Math.random()*30)+"px";
+ h.innerHTML="❤️<br>I Love You";
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),6000);
+}
 
-  setTimeout(() => heart.remove(), 4000);
+function showBigHeart(){
+ let b=document.createElement("div");
+ b.className="big-heart";
+ b.innerHTML="❤️<div style='font-size:30px;margin-top:-25px;'>Ankita</div>";
+ document.body.appendChild(b);
 }
 </script>
 
