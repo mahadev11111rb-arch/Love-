@@ -76,11 +76,23 @@ button{
   transform:translateX(-50%);
 }
 
+/* ❤️ HEART ABOVE LOVE TEXT */
+.big-heart{
+  font-size:60px;
+  margin-top:20px;
+  animation:heartbeat 1.3s infinite;
+}
+
+@keyframes heartbeat{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+}
+
 /* LOVE TITLE */
 #loveTitle{
   font-family:cursive;
   font-size:44px;
-  margin:30px 0 10px;
+  margin:10px 0 10px;
   opacity:0;
   transform:scale(.85);
   background:linear-gradient(90deg,#ff2f7d,#ff9fc4,#ff2f7d);
@@ -99,17 +111,6 @@ button{
   to{background-position:200% center}
 }
 
-.beat-line{
-  width:120px;height:3px;background:#ff2f7d;
-  margin:10px auto 0;border-radius:10px;
-  animation:beat 1.2s infinite;
-}
-
-@keyframes beat{
-  0%,100%{transform:scaleX(1);opacity:.7}
-  50%{transform:scaleX(1.4);opacity:1}
-}
-
 #finalText{
   font-size:22px;
   color:#ff3b7f;
@@ -117,15 +118,17 @@ button{
   min-height:80px;
 }
 
-#msgBox{display:none;margin-top:25px}
+/* MESSAGE AREA */
+#msgBox{
+  margin-top:25px;
+}
 
 .msg-row{
   display:flex;
   gap:10px;
-  align-items:flex-end;
 }
 
-.msg-row textarea{
+textarea{
   flex:1;
   height:70px;
   border-radius:15px;
@@ -136,20 +139,24 @@ button{
 }
 
 .sendBtn{
+  width:100%;
+  margin-top:12px;
   background:#25D366;
   color:white;
-  padding:12px 20px;
+  padding:14px;
   border-radius:30px;
   border:none;
-  font-size:15px;
+  font-size:16px;
 }
 
-/* floating keyboard mode */
+/* FLOATING MODE (keyboard open) */
 #msgBox.floating{
   position:fixed;
-  left:0;right:0;bottom:0;
+  left:0;
+  right:0;
+  bottom:0;
   background:#fff;
-  padding:14px 16px 18px;
+  padding:16px;
   box-shadow:0 -10px 30px rgba(0,0,0,.15);
   z-index:9999;
   border-radius:18px 18px 0 0;
@@ -198,19 +205,21 @@ kya tumhare dil me mere liye pyaar hai?
   <button id="yesBtn">Yes ❤️</button>
 </div>
 
+<!-- ❤️ GAP FILLER HEART -->
+<div class="big-heart" id="bigHeart" style="display:none;">❤️</div>
+
 <div id="loveTitle">
   I Love You Ankita
-  <div class="beat-line"></div>
 </div>
 
 <div id="finalText"></div>
 
-<div id="msgBox">
+<div id="msgBox" style="display:none;">
   <div class="msg-row">
     <textarea id="msg"
       placeholder="Whatever you truly feel for me — write it honestly… ❤️"></textarea>
-    <button class="sendBtn" onclick="sendMsg()">Send 💌</button>
   </div>
+  <button class="sendBtn" onclick="sendMsg()">Send 💌</button>
 </div>
 
 </div>
@@ -227,6 +236,7 @@ const card=document.getElementById("card");
 const finalText=document.getElementById("finalText");
 const msgBox=document.getElementById("msgBox");
 const msgInput=document.getElementById("msg");
+const bigHeart=document.getElementById("bigHeart");
 
 /* FLOW */
 setTimeout(()=>{
@@ -234,7 +244,7 @@ setTimeout(()=>{
   setTimeout(()=>buttons.style.display="block",5000);
 },6000);
 
-/* NO BUTTON LOGIC */
+/* NO BUTTON */
 let noStart=null, voicePlayed=false;
 
 noBtn.onclick=()=>{
@@ -242,8 +252,7 @@ noBtn.onclick=()=>{
   let t=Date.now()-noStart;
 
   if(t<7000){
-    moveNo();
-    return;
+    moveNo(); return;
   }
 
   if(!voicePlayed){
@@ -259,7 +268,7 @@ noBtn.onclick=()=>{
 function moveNo(){
   const x=Math.random()*(card.clientWidth-noBtn.offsetWidth-20);
   const y=Math.random()*70;
-  noBtn.style.transition="all .25s ease-out";
+  noBtn.style.transition="all .25s";
   noBtn.style.left=x+"px";
   noBtn.style.top=y+"px";
 }
@@ -268,6 +277,7 @@ function moveNo(){
 yesBtn.onclick=()=>{
   document.getElementById("yesSong").play();
   yesBtn.style.display="none";
+  bigHeart.style.display="block";
   document.getElementById("loveTitle").classList.add("show");
   typeText();
   hearts();
@@ -298,7 +308,7 @@ function hearts(){
   },280);
 }
 
-/* KEYBOARD HANDLING */
+/* KEYBOARD BEHAVIOR */
 msgInput.addEventListener("focus",()=>msgBox.classList.add("floating"));
 msgInput.addEventListener("blur",()=>msgBox.classList.remove("floating"));
 
@@ -312,7 +322,7 @@ if(window.visualViewport){
   });
 }
 
-/* WHATSAPP */
+/* SEND */
 function sendMsg(){
   const txt=msgInput.value;
   window.open(
