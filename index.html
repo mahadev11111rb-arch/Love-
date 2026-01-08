@@ -8,12 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 
 body{
 min-height:100vh;
@@ -24,18 +19,16 @@ padding:20px 0;
 overflow-y:auto;
 }
 
-/* CARD */
 .card{
 width:95%;
 max-width:500px;
 background:white;
 padding:30px 25px 40px;
-border-radius:28px;
+border-radius:30px;
 text-align:center;
 box-shadow:0 30px 60px rgba(255,105,180,.35);
 }
 
-/* SHAYARI */
 .shayari{
 font-size:20px;
 line-height:1.9;
@@ -43,24 +36,21 @@ color:#b3005e;
 margin-bottom:20px;
 }
 
-/* QUESTION */
 .question{
 font-size:17px;
 color:#7a003c;
 margin-bottom:25px;
 }
 
-/* NAME */
 .name{
 font-family:'Playfair Display',serif;
 font-style:italic;
-font-size:68px;
+font-size:70px;
 color:#ff1f8f;
 text-shadow:0 6px 20px rgba(255,31,143,.45);
 margin-top:15px;
 }
 
-/* UNDERLINE */
 .line{
 width:160px;
 height:4px;
@@ -69,44 +59,41 @@ margin:12px auto 22px;
 border-radius:10px;
 }
 
-/* BUTTON AREA */
 .buttons{
-margin-top:35px;
+margin-top:40px;
 display:flex;
 justify-content:center;
 gap:30px;
 position:relative;
-height:90px;
+height:100px;
 }
 
 /* YES */
 #yes{
-padding:16px 42px;
-font-size:19px;
+padding:16px 46px;
+font-size:20px;
 border:none;
 border-radius:45px;
 cursor:pointer;
 background:linear-gradient(135deg,#ff1f8f,#ff5fb3);
 color:white;
 display:none;
-box-shadow:0 12px 30px rgba(255,31,143,.5);
+box-shadow:0 14px 35px rgba(255,31,143,.55);
 }
 
-/* NO – CARROM STYLE */
+/* NO – REAL BUTTON FEEL */
 #no{
-width:64px;
-height:64px;
-border-radius:50%;
+padding:16px 34px;
+font-size:17px;
+border-radius:45px;
 border:none;
-background:radial-gradient(circle,#fff,#ddd);
-box-shadow:0 0 18px rgba(0,0,0,.3);
 cursor:pointer;
-font-size:12px;
-transition:transform 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+background:#f2f2f2;
+box-shadow:0 10px 25px rgba(0,0,0,.25);
 display:none;
+transition:transform .6s ease;
 }
 
-/* FINAL TEXT */
 .final{
 font-size:23px;
 line-height:2;
@@ -117,12 +104,7 @@ position:relative;
 z-index:2;
 }
 
-/* MESSAGE BOX */
-.msgbox{
-margin-top:30px;
-position:relative;
-z-index:2;
-}
+.msgbox{margin-top:30px;position:relative;z-index:2;}
 
 textarea{
 width:100%;
@@ -144,7 +126,6 @@ border:none;
 border-radius:35px;
 }
 
-/* HEARTS */
 .heart{
 position:fixed;
 font-size:26px;
@@ -154,14 +135,7 @@ opacity:.9;
 }
 
 @keyframes floatUp{
-from{
-transform:translateY(0);
-opacity:1;
-}
-to{
-transform:translateY(-120vh);
-opacity:0;
-}
+to{transform:translateY(-120vh);opacity:0;}
 }
 </style>
 </head>
@@ -207,24 +181,36 @@ kya tumhare dil me mere liye pyaar hai?
 <audio id="song" src="ankita-song.mp3"></audio>
 
 <script>
-setTimeout(()=>{ line2.style.display="block"; },10000);
+/* TIMING */
+setTimeout(()=>{ line2.style.display="block"; },6000);
 setTimeout(()=>{
 line3.style.display="block";
-no.style.display="block";
-},14000);
+no.style.display="inline-block";
+},11000);
 
-/* NO BUTTON */
-let noClicks=0;
+/* NO BUTTON BEHAVIOUR */
+let noStartTime=Date.now();
+let noClicked=false;
+
+no.addEventListener("mouseenter",()=>{
+if(Date.now()-noStartTime < 5000){
+let x=(Math.random()*200)-100;
+let y=(Math.random()*120)-60;
+no.style.transform=`translate(${x}px,${y}px)`;
+}
+});
+
 no.onclick=()=>{
-noClicks++;
+if(Date.now()-noStartTime < 5000) return;
+
+if(!noClicked){
+noClicked=true;
 voice.play();
 
-let x = noClicks % 2 === 1 ? 220 : -220;
-let y = noClicks % 2 === 1 ? -160 : 160;
-no.style.transform = `translate(${x}px,${y}px)`;
-
-if(noClicks===2){
-setTimeout(()=>{ yes.style.display="inline-block"; },3000);
+setTimeout(()=>{
+no.style.display="none";
+yes.style.display="inline-block";
+},6000);
 }
 };
 
@@ -233,7 +219,6 @@ let heartInterval;
 yes.onclick=()=>{
 song.play();
 yes.remove();
-no.remove();
 
 let text="तुम जिंदगी की वो कमी हो, जो शायद जिंदगी भर रहेगी…!!!";
 let i=0;
@@ -247,7 +232,6 @@ msgbox.style.display="block";
 }
 },120);
 
-/* CONTINUOUS HEARTS */
 heartInterval=setInterval(()=>{
 let h=document.createElement("div");
 h.className="heart";
@@ -257,7 +241,7 @@ h.style.bottom="-20px";
 h.style.fontSize=(20+Math.random()*25)+"px";
 document.body.appendChild(h);
 setTimeout(()=>h.remove(),8000);
-},300);
+},280);
 };
 
 /* WHATSAPP */
