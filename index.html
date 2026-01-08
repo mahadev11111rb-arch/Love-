@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,54 +21,61 @@ overflow-y:auto;
 
 .card{
 width:95%;
-max-width:500px;
+max-width:520px;
 background:white;
-padding:30px 25px 40px;
-border-radius:30px;
+padding:28px 24px 40px;
+border-radius:32px;
 text-align:center;
-box-shadow:0 30px 60px rgba(255,105,180,.35);
+box-shadow:0 30px 70px rgba(255,105,180,.35);
 }
 
+/* ===== HEADING ===== */
+.heading{
+margin-bottom:30px;
+}
+
+.heading-name{
+font-family:'Playfair Display',serif;
+font-style:italic;
+font-size:52px;
+color:#ff1f8f;
+text-shadow:0 4px 18px rgba(255,31,143,.45);
+}
+
+.heading-msg{
+margin-top:10px;
+font-size:15px;
+color:#7a003c;
+line-height:1.6;
+max-width:90%;
+margin-left:auto;
+margin-right:auto;
+}
+
+/* ===== TEXT ===== */
 .shayari{
 font-size:20px;
 line-height:1.9;
 color:#b3005e;
-margin-bottom:20px;
+margin-bottom:22px;
 }
 
 .question{
 font-size:17px;
 color:#7a003c;
-margin-bottom:25px;
+margin-bottom:30px;
 }
 
-.name{
-font-family:'Playfair Display',serif;
-font-style:italic;
-font-size:70px;
-color:#ff1f8f;
-text-shadow:0 6px 20px rgba(255,31,143,.45);
-margin-top:15px;
-}
-
-.line{
-width:160px;
-height:4px;
-background:linear-gradient(90deg,#ff1f8f,#ff9acb);
-margin:12px auto 22px;
-border-radius:10px;
-}
-
+/* ===== BUTTONS ===== */
 .buttons{
-margin-top:40px;
+margin-top:30px;
 display:flex;
 justify-content:center;
 gap:30px;
 position:relative;
-height:100px;
+height:110px;
 }
 
-/* YES */
 #yes{
 padding:16px 46px;
 font-size:20px;
@@ -81,10 +88,9 @@ display:none;
 box-shadow:0 14px 35px rgba(255,31,143,.55);
 }
 
-/* NO – REAL BUTTON FEEL */
 #no{
-padding:16px 34px;
-font-size:17px;
+padding:16px 36px;
+font-size:18px;
 border-radius:45px;
 border:none;
 cursor:pointer;
@@ -94,23 +100,29 @@ display:none;
 transition:transform .6s ease;
 }
 
+/* ===== FINAL TEXT ===== */
 .final{
 font-size:23px;
 line-height:2;
 color:#b3005e;
-margin-top:30px;
-min-height:100px;
+margin-top:35px;
+min-height:110px;
 position:relative;
 z-index:2;
 }
 
-.msgbox{margin-top:30px;position:relative;z-index:2;}
+/* ===== MESSAGE BOX ===== */
+.msgbox{
+margin-top:30px;
+position:relative;
+z-index:2;
+}
 
 textarea{
 width:100%;
-height:100px;
-padding:15px;
-border-radius:16px;
+height:110px;
+padding:16px;
+border-radius:18px;
 border:1px solid #ccc;
 font-size:16px;
 }
@@ -126,6 +138,7 @@ border:none;
 border-radius:35px;
 }
 
+/* ===== HEARTS ===== */
 .heart{
 position:fixed;
 font-size:26px;
@@ -144,34 +157,46 @@ to{transform:translateY(-120vh);opacity:0;}
 
 <div class="card">
 
+<!-- HEADING -->
+<div class="heading">
+  <div class="heading-name">Ankita</div>
+  <div class="heading-msg">
+    This message isn’t rehearsed or planned —  
+    it’s something I’m sending straight from my heart, honestly and sincerely.
+  </div>
+</div>
+
+<!-- LINE 1 -->
 <div id="line1" class="shayari">
 मुँह ज़बानी न जताता कि मोहब्बत क्या है<br>
 मैं तुझे कर के दिखाता कि मोहब्बत क्या है
 </div>
 
+<!-- LINE 2 -->
 <div id="line2" class="shayari" style="display:none;">
 कैसे सीने से लगाऊँ कि किसी और के हो<br>
 मेरे होते तो बताता कि मोहब्बत क्या है
 </div>
 
+<!-- QUESTION -->
 <div id="line3" class="question" style="display:none;">
 Main bas ek simple sawal poochna chahta hoon,<br>
 aur uska jawab sirf tumhari marzi se hona chahiye —<br>
 kya tumhare dil me mere liye pyaar hai?
 </div>
 
-<div class="name">Ankita</div>
-<div class="line"></div>
-
+<!-- BUTTONS -->
 <div class="buttons">
 <button id="yes">Yes ❤️</button>
-<button id="no">NO</button>
+<button id="no">No</button>
 </div>
 
+<!-- FINAL TEXT -->
 <div id="final" class="final"></div>
 
+<!-- MESSAGE BOX -->
 <div id="msgbox" class="msgbox" style="display:none;">
-<textarea id="msg" placeholder="Jo bhi tum mere liye mehsoos karti ho, bina jhijhak yahan likho… main padhunga ❤️"></textarea>
+<textarea id="msg" placeholder="Whatever you truly feel for me — write it here freely. I’ll read every word. ❤️"></textarea>
 <button class="send" onclick="sendWhatsApp()">Send 💌</button>
 </div>
 
@@ -181,74 +206,85 @@ kya tumhare dil me mere liye pyaar hai?
 <audio id="song" src="ankita-song.mp3"></audio>
 
 <script>
-/* TIMING */
+/* TEXT TIMING */
 setTimeout(()=>{ line2.style.display="block"; },6000);
 setTimeout(()=>{
-line3.style.display="block";
-no.style.display="inline-block";
+  line3.style.display="block";
+  no.style.display="inline-block";
+  startNoPhase();
 },11000);
 
-/* NO BUTTON BEHAVIOUR */
-let noStartTime=Date.now();
-let noClicked=false;
+/* ===== NO BUTTON LOGIC ===== */
+let noPhase2=false;
+let noUsed=false;
 
-no.addEventListener("mouseenter",()=>{
-if(Date.now()-noStartTime < 5000){
-let x=(Math.random()*200)-100;
-let y=(Math.random()*120)-60;
-no.style.transform=`translate(${x}px,${y}px)`;
+function startNoPhase(){
+  noPhase2=false;
+
+  no.addEventListener("mouseenter", runAway);
+  no.addEventListener("touchstart", runAway);
+
+  setTimeout(()=>{
+    noPhase2=true;
+    no.removeEventListener("mouseenter", runAway);
+    no.removeEventListener("touchstart", runAway);
+  },5000);
 }
-});
+
+function runAway(){
+  if(noPhase2) return;
+  let x=(Math.random()*260)-130;
+  let y=(Math.random()*160)-80;
+  no.style.transform=`translate(${x}px,${y}px)`;
+}
 
 no.onclick=()=>{
-if(Date.now()-noStartTime < 5000) return;
+  if(!noPhase2 || noUsed) return;
+  noUsed=true;
 
-if(!noClicked){
-noClicked=true;
-voice.play();
+  voice.play();
 
-setTimeout(()=>{
-no.style.display="none";
-yes.style.display="inline-block";
-},6000);
-}
+  setTimeout(()=>{
+    no.style.display="none";
+    yes.style.display="inline-block";
+  },6000);
 };
 
-/* YES CLICK */
+/* ===== YES BUTTON ===== */
 let heartInterval;
 yes.onclick=()=>{
-song.play();
-yes.remove();
+  song.play();
+  yes.remove();
 
-let text="तुम जिंदगी की वो कमी हो, जो शायद जिंदगी भर रहेगी…!!!";
-let i=0;
+  let text="तुम जिंदगी की वो कमी हो, जो शायद जिंदगी भर रहेगी…!!!";
+  let i=0;
 
-let typing=setInterval(()=>{
-final.innerHTML+=text.charAt(i);
-i++;
-if(i>=text.length){
-clearInterval(typing);
-msgbox.style.display="block";
-}
-},120);
+  let typing=setInterval(()=>{
+    final.innerHTML+=text.charAt(i);
+    i++;
+    if(i>=text.length){
+      clearInterval(typing);
+      msgbox.style.display="block";
+    }
+  },120);
 
-heartInterval=setInterval(()=>{
-let h=document.createElement("div");
-h.className="heart";
-h.innerHTML="❤️";
-h.style.left=Math.random()*100+"vw";
-h.style.bottom="-20px";
-h.style.fontSize=(20+Math.random()*25)+"px";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),8000);
-},280);
+  heartInterval=setInterval(()=>{
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    h.style.bottom="-20px";
+    h.style.fontSize=(20+Math.random()*25)+"px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),8000);
+  },280);
 };
 
-/* WHATSAPP */
+/* ===== WHATSAPP ===== */
 function sendWhatsApp(){
-let msg=document.getElementById("msg").value;
-let phone="919955414283";
-window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`,"_blank");
+  let msg=document.getElementById("msg").value;
+  let phone="919955414283";
+  window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`,"_blank");
 }
 </script>
 
